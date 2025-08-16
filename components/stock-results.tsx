@@ -103,24 +103,7 @@ export function StockResults({ results, selectedDate }: StockResultsProps) {
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">
-                      {(() => {
-                        try {
-                          const date = new Date(data.timestamp)
-                          if (isNaN(date.getTime())) {
-                            // Try parsing data.date if timestamp is invalid
-                            const fallbackDate = new Date(data.date)
-                            if (isNaN(fallbackDate.getTime())) {
-                              return data.date || data.timestamp
-                            }
-                            return format(fallbackDate, "MMM dd, yyyy")
-                          }
-                          return format(date, "MMM dd, yyyy")
-                        } catch (error) {
-                          return data.date || data.timestamp
-                        }
-                      })()}
-                    </span>
+                    <span className="text-sm font-medium">{format(new Date(data.timestamp), "MMM dd, yyyy")}</span>
                     {isLatest && (
                       <Badge variant="outline" className="text-xs px-2 py-0">
                         Latest
