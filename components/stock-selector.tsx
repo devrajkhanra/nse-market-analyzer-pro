@@ -66,6 +66,10 @@ export function StockSelector({ selectedStocks, onStocksChange }: StockSelectorP
     onStocksChange([])
   }
 
+  const selectAll = () => {
+    onStocksChange(stocks.map(stock => stock.symbol))
+  }
+
   const getStockName = (symbol: string) => {
     const stock = stocks.find((s) => s.symbol === symbol)
     return stock ? stock.companyName : symbol
@@ -130,6 +134,15 @@ export function StockSelector({ selectedStocks, onStocksChange }: StockSelectorP
             Clear All
           </Button>
         )}
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={selectAll}
+          disabled={loading || selectedStocks.length === stocks.length}
+          className="border-primary/30 text-primary hover:bg-primary/10 bg-transparent"
+        >
+          Select All
+        </Button>
       </div>
 
       {selectedStocks.length > 0 && (
