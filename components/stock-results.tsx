@@ -51,6 +51,17 @@ export function StockResults({ results, selectedDate }: StockResultsProps) {
     return `₹${price.toFixed(2)}`
   }
 
+  const formatDate = (timestamp: string) => {
+    if (!timestamp) return 'Invalid Date'
+    try {
+      const date = new Date(timestamp)
+      if (isNaN(date.getTime())) return 'Invalid Date'
+      return format(date, "MMM dd, yyyy")
+    } catch (error) {
+      return 'Invalid Date'
+    }
+  }
+
   const getCandleType = (data: StockData) => {
     return data.closePrice > data.openPrice ? "bullish" : "bearish"
   }
@@ -105,7 +116,7 @@ export function StockResults({ results, selectedDate }: StockResultsProps) {
               >
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-medium">{format(new Date(data.timestamp), "MMM dd, yyyy")}</span>
+                    <span className="text-sm font-medium">{formatDate(data.timestamp)}</span>
                     {isLatest && (
                       <Badge variant="outline" className="text-xs px-2 py-0">
                         Latest
