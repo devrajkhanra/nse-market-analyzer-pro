@@ -39,6 +39,7 @@ export function StockResults({ results, selectedDate }: StockResultsProps) {
   const failedStocks = results.filter((result) => !result.passed)
 
   const formatNumber = (num: number) => {
+    if (num === undefined || num === null || isNaN(num)) return '0'
     if (num >= 10000000) return `${(num / 10000000).toFixed(1)}Cr`
     if (num >= 100000) return `${(num / 100000).toFixed(1)}L`
     if (num >= 1000) return `${(num / 1000).toFixed(1)}K`
@@ -46,6 +47,7 @@ export function StockResults({ results, selectedDate }: StockResultsProps) {
   }
 
   const formatPrice = (price: number) => {
+    if (price === undefined || price === null || isNaN(price)) return '₹0.00'
     return `₹${price.toFixed(2)}`
   }
 
